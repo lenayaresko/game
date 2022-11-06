@@ -1,26 +1,16 @@
-const login = document.querySelector('.login-input');
-const password = document.querySelector('.password-input');
-const button = document.querySelector('.button');
-const success = document.querySelector('.content-success');
+const chooseLevelStage = document.querySelectorAll('.choose-level-number');
+const chooseLevelbutton = document.querySelector('.choose-level-button');
 
-const content = document.querySelector('.content');
+let chosenLevel;
 
 
-button.addEventListener("click", function (event) {
-    if (login.value !== '' && password.value !== '') {
-        request({
-            onSuccess: (data) => {
-                content.style.display = 'none';
-                success.style.display = 'flex';
-            },
-            onError: () => {
-                content.textContent = 'Ошибка';
-            }
-        })
-    } else {
-        login.classList.add('error');
-        password.classList.add('error');
-
-    }
+chooseLevelStage.forEach(element => {
+    element.addEventListener("click", function (event) {
+        chosenLevel = element.textContent;
+        element.classList.toggle('chosenLevel');
+    });
 });
 
+chooseLevelbutton.addEventListener('click', function (event) {
+    window.location.href = './game.html';
+});
