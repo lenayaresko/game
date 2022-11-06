@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  .body {
+    font-family: "Montserrat", sans-serif;
+    box-sizing: border-box;
+  }
+  .content {
+    background-color:rgb(249, 189, 201);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  .content-success {
+    background-color:rgb(155, 150, 151);
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+  }
+  input {
+    width: 200px;
+    height: 50px;
+    font-family: "Montserrat", sans-serif;
+    padding-left: 15px;
+    color: black;
+  }
+  input::placeholder {
+    font-family: "Montserrat", sans-serif;
+  }
+  .title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    padding: 10px 0;
+    font-weight: 700;
+  }
+  .password-input {
+    font-size: 20px;
+  }
+  .button {
+    width: 200px;
+    height: 50px;
+    background: #000;
+    font-family: "Montserrat", sans-serif;
+    color: blanchedalmond;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .error {
+    border-color: red;
+  }
+  
