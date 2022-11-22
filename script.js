@@ -6,10 +6,9 @@ const contentScreen2 = document.querySelector('.content-screen-2');
 
 let chosenLevelNumber;
 
-
-chooseLevelStage.forEach(element => {
-    element.addEventListener("click", function (event) {
-        document.querySelectorAll('.chosenLevel').forEach(element => {
+chooseLevelStage.forEach((element) => {
+    element.addEventListener('click', function () {
+        document.querySelectorAll('.chosenLevel').forEach((element) => {
             element.classList.remove('chosenLevel');
         });
         chosenLevelNumber = element.textContent;
@@ -17,8 +16,7 @@ chooseLevelStage.forEach(element => {
     });
 });
 
-
-chooseLevelbutton.addEventListener("click", function (event) {
+chooseLevelbutton.addEventListener('click', function () {
     contentScreen1.style.display = 'none';
     contentScreen2.style.display = 'flex';
     chosenLevelNumberParagraph.innerHTML = `Вы выбрали уровень: ${chosenLevelNumber}`;
