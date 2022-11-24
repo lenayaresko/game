@@ -182,72 +182,33 @@ chooseLevelStage.forEach((element) => {
 
 chooseLevelbutton.addEventListener('click', function () {
     const shuffledDeck = shuffle(CARDS);
-    let playCardsArr = [];
+    let arr = [];
     if (Number(chosenLevelNumber) === 1) {
         for (let i = 0; i < 3; i++) {
-            let randomCards = Math.floor(Math.random() * shuffledDeck.length);
-
-            while (!playCardsArr.includes(shuffledDeck[randomCards])) {
-                playCardsArr.push(shuffledDeck[randomCards]);
-            }
-        }
-        shuffle(playCardsArr);
-        console.log(playCardsArr);
-
-        let newArr = [];
-
-        for (let i = 0; i < 6; i++) {
             const card = document.createElement('img');
-            let cardImage =
-                playCardsArr[Math.floor(Math.random() * playCardsArr.length)]
-                    .image;
-
-            if (newArr.includes(cardImage)) {
-                while (newArr.filter((x) => x === cardImage).length <= 2) {
-                    newArr.push(cardImage);
-                    card.src = cardImage;
-                    card.classList.add('card-image');
-                    row1.appendChild(card);
-                }
-                cardImage =
-                    playCardsArr[
-                        Math.floor(Math.random() * playCardsArr.length)
-                    ].image;
-                while (newArr.filter((x) => x === cardImage).length <= 2) {
-                    newArr.push(cardImage);
-                    card.src = cardImage;
-                    card.classList.add('card-image');
-                    row1.appendChild(card);
-                }
-            } else {
-                newArr.push(cardImage);
-                card.src = cardImage;
-                card.classList.add('card-image');
-                row1.appendChild(card);
-            }
+            card.src = './img/рубашка.svg';
+            card.classList.add('card-image-back');
+            row1.appendChild(card);
+            let a = Math.floor(Math.random() * shuffledDeck.length);
+            arr.push(shuffledDeck[a]);
+        }
+        for (let i = 0; i < 3; i++) {
+            const card = document.createElement('img');
+            card.src = './img/рубашка.svg';
+            card.classList.add('card-image-back');
+            row2.appendChild(card);
         }
 
-        console.log(newArr);
-
-        const gameCardsFront = document.querySelectorAll('.card-image');
-
-        setTimeout(() => {
-            gameCardsFront.forEach((element) => {
-                element.src = './img/рубашка.svg';
-            });
-        }, 5000);
-
-        const gameCardsBack = document.querySelectorAll('.card-image-back');
-
-        gameCardsBack.forEach((element) => {
+        const gameCards = document.querySelectorAll('.card-image-back');
+        gameCards.forEach((element) => {
             element.addEventListener('click', function () {
-                // Math.floor(Math.random() * shuffledDeck.length);
-                // element.src = arr[0].image;
-                // setTimeout(() => {
-                //     gameCards.forEach((element) => {
-                //         element.src = './img/рубашка.svg';
-                //     });
-                // }, 5000);
+                Math.floor(Math.random() * shuffledDeck.length);
+                element.src = arr[0].image;
+                setTimeout(() => {
+                    gameCards.forEach((element) => {
+                        element.src = './img/рубашка.svg';
+                    });
+                }, 2500);
             });
         });
     } else if (Number(chosenLevelNumber) === 2) {
@@ -263,18 +224,6 @@ chooseLevelbutton.addEventListener('click', function () {
             card.classList.add('card-image-back');
             row2.appendChild(card);
         }
-        const gameCards = document.querySelectorAll('.card-image-back');
-        gameCards.forEach((element) => {
-            // element.addEventListener('click', function () {
-            //     Math.floor(Math.random() * shuffledDeck.length);
-            //     element.src = arr[0].image;
-            //     setTimeout(() => {
-            //         gameCards.forEach((element) => {
-            //             element.src = './img/рубашка.svg';
-            //         });
-            //     }, 5000);
-            // });
-        });
     } else if (Number(chosenLevelNumber) === 3) {
         for (let i = 0; i < 6; i++) {
             const card = document.createElement('img');
@@ -294,18 +243,6 @@ chooseLevelbutton.addEventListener('click', function () {
             card.classList.add('card-image-back');
             row3.appendChild(card);
         }
-        const gameCards = document.querySelectorAll('.card-image-back');
-        gameCards.forEach((element) => {
-            // element.addEventListener('click', function () {
-            //     Math.floor(Math.random() * shuffledDeck.length);
-            //     element.src = arr[0].image;
-            //     setTimeout(() => {
-            //         gameCards.forEach((element) => {
-            //             element.src = './img/рубашка.svg';
-            //         });
-            //     }, 5000);
-            // });
-        });
     }
 
     contentScreen1.style.display = 'none';
