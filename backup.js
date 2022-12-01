@@ -4,7 +4,7 @@ const contentScreen1 = document.querySelector('.content-screen-1');
 const contentScreen2 = document.querySelector('.content-screen-2');
 const row1 = document.querySelector('.row-1');
 const row2 = document.querySelector('.row-2');
-// const row3 = document.querySelector('.row-3');
+const row3 = document.querySelector('.row-3');
 
 // Глобальные переменные
 const CARDS = [
@@ -171,7 +171,6 @@ function shuffle(array) {
 
 let chosenLevelNumber;
 const shuffledDeck = shuffle(CARDS);
-let playCardsArr = [];
 
 // Экран выбора уровня
 chooseLevelStage.forEach((element) => {
@@ -179,111 +178,177 @@ chooseLevelStage.forEach((element) => {
         document.querySelectorAll('.chosen-level').forEach((element) => {
             element.classList.remove('chosen-level');
         });
-        chosenLevelNumber = Number(element.textContent);
+        chosenLevelNumber = element.textContent;
         element.classList.toggle('chosen-level');
     });
 });
 
-// Генерим карточки и выводим
 function cardsScreen(chosenLevelNumber) {
+    let playCardsArr = [];
     switch (chosenLevelNumber) {
         case 1:
             for (let i = 0; i < 3; i++) {
                 let randomCards = Math.floor(
                     Math.random() * shuffledDeck.length
                 );
-                if (playCardsArr.includes(randomCards)) {
-                    let i = i - 1;
-                } else {
+
+                while (!playCardsArr.includes(shuffledDeck[randomCards])) {
                     playCardsArr.push(shuffledDeck[randomCards]);
                 }
             }
             shuffle(playCardsArr);
-            return playCardsArr;
+            console.log(playCardsArr);
+            break;
         case 2:
             for (let i = 0; i < 6; i++) {
                 let randomCards = Math.floor(
                     Math.random() * shuffledDeck.length
                 );
-                if (playCardsArr.includes(randomCards)) {
-                    let i = i - 1;
-                } else {
+
+                while (!playCardsArr.includes(shuffledDeck[randomCards])) {
                     playCardsArr.push(shuffledDeck[randomCards]);
                 }
             }
             shuffle(playCardsArr);
-            return playCardsArr;
+            console.log(playCardsArr);
+            break;
         case 3:
             for (let i = 0; i < 9; i++) {
                 let randomCards = Math.floor(
                     Math.random() * shuffledDeck.length
                 );
-                if (playCardsArr.includes(randomCards)) {
-                    let i = i - 1;
-                } else {
+
+                while (!playCardsArr.includes(shuffledDeck[randomCards])) {
                     playCardsArr.push(shuffledDeck[randomCards]);
                 }
             }
             shuffle(playCardsArr);
-            return playCardsArr;
+            console.log(playCardsArr);
+            break;
         default:
             alert('Что-то пошло не так');
     }
 }
 
 chooseLevelbutton.addEventListener('click', function () {
-    cardsScreen(chosenLevelNumber);
-    contentScreen1.style.display = 'none';
-    contentScreen2.style.display = 'flex';
-    playCardsArr = playCardsArr.concat(playCardsArr);
-    shuffle(playCardsArr);
-    for (let i = 0; i < playCardsArr.length; i++) {
-        const element = playCardsArr[i];
-        const card = document.createElement('img');
-        card.src = element.image;
-        card.classList.add('card-image');
-        if (i < playCardsArr.length / 2) {
-            row1.appendChild(card);
-        } else {
-            row2.appendChild(card);
-        }
-    }
-    const gameCardsFront = document.querySelectorAll('.card-image');
+    if (Number(chosenLevelNumber) === 1) {
 
-    setTimeout(() => {
-        gameCardsFront.forEach((element) => {
-            element.src = './img/рубашка.svg';
-        });
-    }, 5000);
+        let newArr = [];
 
-    gameCardsFront.forEach(function (gameCard, i) {
-        gameCard.addEventListener('click', function () {
-            let activeCardsFront = document.querySelectorAll('.active');
-            if (activeCardsFront.length < 2) {
-                gameCard.src = playCardsArr[i].image;
-                gameCard.classList.add('active');
-                activeCardsFront = document.querySelectorAll('.active');
-                if (
-                    activeCardsFront.length === 2 &&
-                    activeCardsFront[0].src === activeCardsFront[1].src
-                ) {
-                    setTimeout(() => {
-                        alert('Вы выиграли');
-                    }, 300);
-                } else if (
-                    activeCardsFront.length === 2 &&
-                    activeCardsFront[0].src !== activeCardsFront[1].src
-                ) {
-                    setTimeout(() => {
-                        alert('Вы проиграли');
-                    }, 300);
+        for (let i = 0; i < 6; i++) {
+            const card = document.createElement('img');
+            let cardImage =
+                playCardsArr[Math.floor(Math.random() * playCardsArr.length)]
+                    .image;
+
+            if (newArr.includes(cardImage)) {
+                while (newArr.filter((x) => x === cardImage).length <= 2) {
+                    newArr.push(cardImage);
+                    card.src = cardImage;
+                    card.classList.add('card-image');
+                    row1.appendChild(card);
+                }
+                cardImage =
+                    playCardsArr[
+                        Math.floor(Math.random() * playCardsArr.length)
+                    ].image;
+                while (newArr.filter((x) => x === cardImage).length <= 2) {
+                    newArr.push(cardImage);
+                    card.src = cardImage;
+                    card.classList.add('card-image');
+                    row1.appendChild(card);
                 }
             } else {
-                activeCardsFront.forEach((element) => {
-                    element.classList.remove('active');
-                    element.src = './img/рубашка.svg';
-                });
+                newArr.push(cardImage);
+                card.src = cardImage;
+                card.classList.add('card-image');
+                row1.appendChild(card);
             }
+        }
+
+        console.log(newArr);
+
+        const gameCardsFront = document.querySelectorAll('.card-image');
+
+        setTimeout(() => {
+            gameCardsFront.forEach((element) => {
+                element.src = './img/рубашка.svg';
+            });
+        }, 5000);
+
+        const gameCardsBack = document.querySelectorAll('.card-image-back');
+
+        gameCardsBack.forEach((element) => {
+            element.addEventListener('click', function () {
+                // Math.floor(Math.random() * shuffledDeck.length);
+                // element.src = arr[0].image;
+                // setTimeout(() => {
+                //     gameCards.forEach((element) => {
+                //         element.src = './img/рубашка.svg';
+                //     });
+                // }, 5000);
+            });
         });
-    });
+    } else if (Number(chosenLevelNumber) === 2) {
+        for (let i = 0; i < 6; i++) {
+            const card = document.createElement('img');
+            card.src = './img/рубашка.svg';
+            card.classList.add('card-image-back');
+            row1.appendChild(card);
+        }
+        for (let i = 0; i < 6; i++) {
+            const card = document.createElement('img');
+            card.src = './img/рубашка.svg';
+            card.classList.add('card-image-back');
+            row2.appendChild(card);
+        }
+        const gameCards = document.querySelectorAll('.card-image-back');
+        gameCards.forEach((element) => {
+            // element.addEventListener('click', function () {
+            //     Math.floor(Math.random() * shuffledDeck.length);
+            //     element.src = arr[0].image;
+            //     setTimeout(() => {
+            //         gameCards.forEach((element) => {
+            //             element.src = './img/рубашка.svg';
+            //         });
+            //     }, 5000);
+            // });
+        });
+    } else if (Number(chosenLevelNumber) === 3) {
+        for (let i = 0; i < 6; i++) {
+            const card = document.createElement('img');
+            card.src = './img/рубашка.svg';
+            card.classList.add('card-image-back');
+            row1.appendChild(card);
+        }
+        for (let i = 0; i < 6; i++) {
+            const card = document.createElement('img');
+            card.src = './img/рубашка.svg';
+            card.classList.add('card-image-back');
+            row2.appendChild(card);
+        }
+        for (let i = 0; i < 6; i++) {
+            const card = document.createElement('img');
+            card.src = './img/рубашка.svg';
+            card.classList.add('card-image-back');
+            row3.appendChild(card);
+        }
+        const gameCards = document.querySelectorAll('.card-image-back');
+        gameCards.forEach((element) => {
+            // element.addEventListener('click', function () {
+            //     Math.floor(Math.random() * shuffledDeck.length);
+            //     element.src = arr[0].image;
+            //     setTimeout(() => {
+            //         gameCards.forEach((element) => {
+            //             element.src = './img/рубашка.svg';
+            //         });
+            //     }, 5000);
+            // });
+        });
+    }
+
+    contentScreen1.style.display = 'none';
+    contentScreen2.style.display = 'flex';
+
+    console.log(chosenLevelNumber);
 });
