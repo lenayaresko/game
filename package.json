@@ -9,6 +9,7 @@
         "format": "prettier --write ./src/",
         "lint:js": "eslint ./src/*.js",
         "lint:css": "stylelint ./src/**/*.css",
+        "lint:ts": "tsc --noEmit",
         "prepare": "husky install",
         "lint": "npm run lint:js && npm run lint:css",
         "build": "set NODE_ENV=production webpack"
@@ -30,6 +31,7 @@
         "lodash": "^4.17.21"
     },
     "devDependencies": {
+        "@types/lodash": "^4.14.191",
         "copy-webpack-plugin": "^11.0.0",
         "css-loader": "^6.7.2",
         "css-minimizer-webpack-plugin": "^4.2.2",
@@ -42,6 +44,8 @@
         "stylelint-config-prettier": "^9.0.4",
         "stylelint-config-standard": "^29.0.0",
         "stylelint-prettier": "^2.0.0",
+        "ts-loader": "^9.4.2",
+        "typescript": "^4.9.3",
         "webpack-cli": "^5.0.0",
         "webpack-dev-server": "^4.11.1"
     }
