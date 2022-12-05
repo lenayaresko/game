@@ -6,7 +6,6 @@ const contentScreen1 = document.querySelector('.content-screen-1');
 const contentScreen2 = document.querySelector('.content-screen-2');
 const row1 = document.querySelector('.row-1');
 const row2 = document.querySelector('.row-2');
-// const row3 = document.querySelector('.row-3');
 
 // Глобальные переменные
 const CARDS = [
