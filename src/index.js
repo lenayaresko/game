@@ -7,152 +7,154 @@ const contentScreen1 = document.querySelector('.content-screen-1');
 const contentScreen2 = document.querySelector('.content-screen-2');
 const row1 = document.querySelector('.row-1');
 const row2 = document.querySelector('.row-2');
+const timer = document.querySelector('.info-time-tracker');
+const gameStartAgainButton = document.querySelector('.game-start-again-button');
 
 // Глобальные переменные
 const CARDS = [
     {
-        name: '6 бубны',
-        image: './static/img/6 бубны.svg',
+        name: '6diamonds',
+        image: './static/img/6diamonds.svg',
     },
     {
-        name: '6 крести',
-        image: './static/img/6 крести.svg',
+        name: '6clubs',
+        image: './static/img/6clubs.svg',
     },
     {
-        name: '6 пики',
-        image: './static/img/6 пики.svg',
+        name: '6spades',
+        image: './static/img/6spades.svg',
     },
     {
-        name: '6 черви',
-        image: './static/img/6 черви.svg',
+        name: '6hearts',
+        image: './static/img/6hearts.svg',
     },
     {
-        name: '7 бубны',
-        image: './static/img/7 бубны.svg',
+        name: '7diamonds',
+        image: './static/img/7diamonds.svg',
     },
     {
-        name: '7 крести',
-        image: './static/img/7 крести.svg',
+        name: '7clubs',
+        image: './static/img/7clubs.svg',
     },
     {
-        name: '7 пики',
-        image: './static/img/7 пики.svg',
+        name: '7spades',
+        image: './static/img/7spades.svg',
     },
     {
-        name: '7 черви',
-        image: './static/img/7 черви.svg',
+        name: '7hearts',
+        image: './static/img/7hearts.svg',
     },
     {
-        name: '8 бубны',
-        image: './static/img/8 бубны.svg',
+        name: '8diamonds',
+        image: './static/img/8diamonds.svg',
     },
     {
-        name: '8 крести',
-        image: './static/img/8 крести.svg',
+        name: '8clubs',
+        image: './static/img/8clubs.svg',
     },
     {
-        name: '8 пики',
-        image: './static/img/8 пики.svg',
+        name: '8spades',
+        image: './static/img/8spades.svg',
     },
     {
-        name: '8 черви',
-        image: './static/img/8 черви.svg',
+        name: '8hearts',
+        image: './static/img/8hearts.svg',
     },
     {
-        name: '9 бубны',
-        image: './static/img/9 бубны.svg',
+        name: '9diamonds',
+        image: './static/img/9diamonds.svg',
     },
     {
-        name: '9 крести',
-        image: './static/img/9 крести.svg',
+        name: '9clubs',
+        image: './static/img/9clubs.svg',
     },
     {
-        name: '9 пики',
-        image: './static/img/9 пики.svg',
+        name: '9spades',
+        image: './static/img/9spades.svg',
     },
     {
-        name: '9 черви',
-        image: './static/img/9 черви.svg',
+        name: '9hearts',
+        image: './static/img/9hearts.svg',
     },
     {
-        name: '10 бубны',
-        image: './static/img/10 бубны.svg',
+        name: '10diamonds',
+        image: './static/img/10diamonds.svg',
     },
     {
-        name: '10 крести',
-        image: './static/img/10 крести.svg',
+        name: '10clubs',
+        image: './static/img/10clubs.svg',
     },
     {
-        name: '10 пики',
-        image: './static/img/10 пики.svg',
+        name: '10spades',
+        image: './static/img/10spades.svg',
     },
     {
-        name: '10 черви',
-        image: './static/img/10 черви.svg',
+        name: '10hearts',
+        image: './static/img/10hearts.svg',
     },
     {
-        name: 'валет бубны',
-        image: './static/img/валет бубны.svg',
+        name: 'jackofdiamonds',
+        image: './static/img/jackofdiamonds.svg',
     },
     {
-        name: 'валет крести',
-        image: './static/img/валет крести.svg',
+        name: 'jackofclubs',
+        image: './static/img/jackofclubs.svg',
     },
     {
-        name: 'валет пики',
-        image: './static/img/валет пики.svg',
+        name: 'jackofspades',
+        image: './static/img/jackofspades.svg',
     },
     {
-        name: 'валет черви',
-        image: './static/img/валет черви.svg',
+        name: 'jackofhearts',
+        image: './static/img/jackofhearts.svg',
     },
     {
-        name: 'дама бубны',
-        image: './static/img/дама бубны.svg',
+        name: 'queenofdiamonds',
+        image: './static/img/queenofdiamonds.svg',
     },
     {
-        name: 'дама крести',
-        image: './static/img/дама крести.svg',
+        name: 'queenofclubs',
+        image: './static/img/queenofclubs.svg',
     },
     {
-        name: 'дама пики',
-        image: './static/img/дама пики.svg',
+        name: 'queenofspades',
+        image: './static/img/queenofspades.svg',
     },
     {
-        name: 'дама черви',
-        image: './static/img/дама черви.svg',
+        name: 'queenofhearts',
+        image: './static/img/queenofhearts.svg',
     },
     {
-        name: 'король бубны',
-        image: './static/img/король бубны.svg',
+        name: 'kingofdiamonds',
+        image: './static/img/kingofdiamonds.svg',
     },
     {
-        name: 'король крести',
-        image: './static/img/король крести.svg',
+        name: 'kingofclubs',
+        image: './static/img/kingofclubs.svg',
     },
     {
-        name: 'король пики',
-        image: './static/img/король пики.svg',
+        name: 'kingofspades',
+        image: './static/img/kingofspades.svg',
     },
     {
-        name: 'король черви',
-        image: './static/img/король черви.svg',
+        name: 'kingofhearts',
+        image: './static/img/kingofhearts.svg',
     },
     {
-        name: 'туз бубны',
-        image: './static/img/туз бубны.svg',
+        name: 'aceofdiamonds',
+        image: './static/img/aceofdiamonds.svg',
     },
     {
-        name: 'туз крести',
-        image: './static/img/туз крести.svg',
+        name: 'aceofclubs',
+        image: './static/img/aceofclubs.svg',
     },
     {
-        name: 'туз пики',
-        image: './static/img/туз пики.svg',
+        name: 'aceofspades',
+        image: './static/img/aceofspades.svg',
     },
     {
-        name: 'туз черви',
-        image: './static/img/туз черви.svg',
+        name: 'aceofhearts',
+        image: './static/img/aceofhearts.svg',
     },
 ];
 
@@ -170,7 +172,7 @@ function shuffle(array) {
     }
     return array;
 }
-
+let timerCount;
 let chosenLevelNumber;
 const shuffledDeck = shuffle(CARDS);
 let playCardsArr = [];
@@ -254,8 +256,32 @@ chooseLevelbutton.addEventListener('click', function () {
 
     setTimeout(() => {
         gameCardsFront.forEach((element) => {
-            element.src = './static/img/рубашка.svg';
+            element.src = './static/img/cover.svg';
         });
+        let minutes = 0;
+        let seconds = 0;
+        let min = 0;
+        let sec = 0;
+        timerCount = setInterval(function () {
+            sec = sec + 1;
+            if (sec < 10) {
+                seconds = '0' + sec;
+            }
+            if (sec >= 10) {
+                seconds = sec;
+            }
+            if (sec > 58) {
+                sec = 0;
+                min = min + 1;
+            }
+            if (min < 10) {
+                minutes = '0' + min;
+            }
+            if (min >= 10) {
+                minutes = min;
+            }
+            timer.innerHTML = minutes + '.' + seconds;
+        }, 1000);
     }, 5000);
 
     gameCardsFront.forEach(function (gameCard, i) {
@@ -272,6 +298,7 @@ chooseLevelbutton.addEventListener('click', function () {
                     setTimeout(() => {
                         alert('Вы выиграли');
                     }, 300);
+                    clearTimeout(timerCount);
                 } else if (
                     activeCardsFront.length === 2 &&
                     activeCardsFront[0].src !== activeCardsFront[1].src
@@ -279,13 +306,18 @@ chooseLevelbutton.addEventListener('click', function () {
                     setTimeout(() => {
                         alert('Вы проиграли');
                     }, 300);
+                    clearTimeout(timerCount);
                 }
             } else {
                 activeCardsFront.forEach((element) => {
                     element.classList.remove('active');
-                    element.src = './src/static/img/рубашка.svg';
+                    element.src = './src/static/img/cover.svg';
                 });
             }
         });
+    });
+
+    gameStartAgainButton.addEventListener('click', function () {
+        clearTimeout(timerCount);
     });
 });
