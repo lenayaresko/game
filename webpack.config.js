@@ -8,7 +8,7 @@ const mode =
     process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
 module.exports = {
-    entry: './src/script.js',
+    entry: './src/index.js',
     mode,
     module: {
         rules: [
@@ -45,7 +45,7 @@ module.exports = {
     },
     plugins: [
         new CopyPlugin({
-            patterns: [{ from: 'static', to: 'static' }],
+            patterns: [{ from: './src/static', to: './static' }],
         }),
         new MiniCssExtractPlugin(),
         new HtmlWebpackPlugin({

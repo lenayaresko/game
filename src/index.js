@@ -1,4 +1,5 @@
 import './css/style.css';
+// import * as _ from 'lodash';
 
 const chooseLevelStage = document.querySelectorAll('.choose-level-number');
 const chooseLevelbutton = document.querySelector('.choose-level-button');

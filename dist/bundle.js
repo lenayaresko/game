@@ -56,12 +56,13 @@ __webpack_require__.r(__webpack_exports__);
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!***********************!*\
-  !*** ./src/script.js ***!
-  \***********************/
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/style.css */ "./src/css/style.css");
 
+// import * as _ from 'lodash';
 
 const chooseLevelStage = document.querySelectorAll('.choose-level-number');
 const chooseLevelbutton = document.querySelector('.choose-level-button');
@@ -69,7 +70,6 @@ const contentScreen1 = document.querySelector('.content-screen-1');
 const contentScreen2 = document.querySelector('.content-screen-2');
 const row1 = document.querySelector('.row-1');
 const row2 = document.querySelector('.row-2');
-// const row3 = document.querySelector('.row-3');
 
 // Глобальные переменные
 const CARDS = [
