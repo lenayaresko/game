@@ -7,7 +7,7 @@ const mode =
     process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
 module.exports = {
-    entry: './script.js',
+    entry: './src/script.js',
     mode,
     module: {
         rules: [
@@ -37,6 +37,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
+        clean: true,
     },
     resolve: {
         extensions: ['.ts', '.js'],

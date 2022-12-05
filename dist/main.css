@@ -1,3 +1,6 @@
+/*!*********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/style.css ***!
+  \*********************************************************************/
 /* stylelint-disable declaration-block-no-redundant-longhand-properties */
 /* stylelint-disable font-family-name-quotes */
 /* stylelint-disable prettier/prettier */
@@ -167,3 +170,6 @@
     width: 93px;
     height: 94px;
 }
+
+
+/*# sourceMappingURL=main.css.map*/
