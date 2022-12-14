@@ -154,6 +154,21 @@
     cursor: pointer;
 }
 
+.game-start-again-button-final {
+    width: 246px;
+    height: 48px;
+    background: #7ac100;
+    border-radius: 12px;
+    border: none;
+    color: #fff;
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    cursor: pointer;
+}
+
 .game-start-cards {
     display: flex;
     justify-content: center;
@@ -166,4 +181,55 @@
     border: 3px solid #004980;
     width: 93px;
     height: 94px;
+}
+
+.text {
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    color: #000;
+    padding-top: 18px;
+    padding-bottom: 10px;
+}
+
+.final-time {
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 72px;
+    color: #000;
+    padding-bottom: 40px;
+}
+
+.content-screen-3 {
+    background-color: #004980;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    display: none;
+}
+
+.popup {
+    background-color: #c2f5ff;
+    width: 480px;
+    height: 459px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.you-won-title {
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+    color: #004980;
 }

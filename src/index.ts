@@ -11,6 +11,10 @@ const row1 = document.querySelector('.row-1');
 const row2 = document.querySelector('.row-2');
 const timer = document.querySelector('.info-time-tracker');
 const gameStartAgainButton = document.querySelector('.game-start-again-button');
+const gameStartAgainButtonFinal = document.querySelector(
+    '.game-start-again-button-final'
+);
+const finalTime = document.querySelector('.final-time');
 
 // Глобальные переменные
 const CARDS = [
@@ -180,6 +184,8 @@ const shuffledDeck = shuffle(CARDS);
 let playCardsArr: any[] = [];
 let minutes: Number | string = 0;
 let seconds: Number | string = 0;
+let min = 0;
+let sec = 0;
 
 // Экран выбора уровня
 function chooseLevelscreen() {
@@ -275,8 +281,8 @@ chooseLevelbutton.addEventListener('click', function () {
         });
         minutes === 0;
         seconds === 0;
-        let min = 0;
-        let sec = 0;
+        min = 0;
+        sec = 0;
         timerCount = setInterval(function () {
             sec = sec + 1;
             if (sec < 10) {
@@ -299,14 +305,20 @@ chooseLevelbutton.addEventListener('click', function () {
         }, 1000);
     }, 5000);
 
-    gameCardsClosed.forEach(function clicks(gameCard: HTMLImageElement, i) {
-        gameCard.addEventListener('click', function () {
+    gameCardsClosed.forEach(function (gameCard: HTMLImageElement, i) {
+        gameCard.addEventListener('click', function clicks() {
+            if (gameCard.classList.contains('active')) {
+                removeEventListener('click', clicks, {
+                    capture: true,
+                });
+            }
             gameCardsFront = document.querySelectorAll('.active');
             // Если выбрана одна карта
             if (gameCardsFront.length < 2) {
                 gameCard.src = playCardsArr[i].image;
                 gameCard.classList.add('active');
                 gameCard.classList.remove('closed');
+                gameCardsFront = document.querySelectorAll('.active');
             }
             // Если выбрано две карты
             if (gameCardsFront.length === 2) {
@@ -314,10 +326,19 @@ chooseLevelbutton.addEventListener('click', function () {
                 if (gameCardsFront[0].src === gameCardsFront[1].src) {
                     gameCardsFront = document.querySelectorAll('.active');
                     gameCardsFront.forEach((element) => {
+                        element.classList.add('guessed');
                         element.classList.remove('active');
                         element.classList.remove('closed');
                         gameCardsClosed = document.querySelectorAll('.closed');
                     });
+
+                    if (
+                        document.querySelectorAll('.guessed').length ===
+                        document.querySelectorAll('.card-image').length
+                    ) {
+                        clearTimeout(timerCount);
+                        finalScreen(min, sec);
+                    }
                 } else {
                     gameCardsFront = document.querySelectorAll('.active');
                     gameCardsClosed = document.querySelectorAll('.closed');
@@ -335,19 +356,40 @@ chooseLevelbutton.addEventListener('click', function () {
         });
     });
 
-    function finalScreen() {
-        gameCardsFront = document.querySelectorAll('.active');
-        gameCardsClosed = document.querySelectorAll('.closed');
-        gameCards.forEach((element) => {
-            if (
-                !element.classList.contains('active') &&
-                !element.classList.contains('closed')
-            ) {
-                clearTimeout(timerCount);
-                console.log(timer.innerHTML);
-            } else {
-                console.log('object');
+    function finalScreen(min: Number, sec: Number) {
+        const contentScreen3: HTMLDivElement =
+            document.querySelector('.content-screen-3');
+        if (sec < 10) {
+            seconds = '0' + sec;
+        }
+        if (sec >= 10) {
+            seconds = sec;
+        }
+        if (min < 10) {
+            minutes = '0' + min;
+        }
+        if (min >= 10) {
+            minutes = min;
+        }
+        finalTime.innerHTML = minutes + '.' + seconds;
+        contentScreen3.style.display = 'flex';
+        contentScreen2.style.display = 'none';
+        gameStartAgainButtonFinal.addEventListener('click', function () {
+            clearTimeout(timerCount);
+            contentScreen3.style.display = 'none';
+            playCardsArr = [];
+            while (row1.firstChild) {
+                row1.removeChild(row1.firstChild);
             }
+            while (row2.firstChild) {
+                row2.removeChild(row2.firstChild);
+            }
+            timer.innerHTML = '00.00';
+            contentScreen1.style.display = 'flex';
+            document.querySelectorAll('.chosen-level').forEach((element) => {
+                element.classList.remove('chosen-level');
+            });
+            contentScreen2.style.display = 'none';
         });
     }
 
