@@ -1,12 +1,13 @@
 {
     "compilerOptions": {
-        "strict": true, // Включает все жесткие проверки типов
-        "outDir": "./dist/",
-        "noImplicitAny": true,
-        "module": "es6",
-        "target": "es5",
-        "sourceMap": true,
-        "allowJs": true,
-        "moduleResolution": "node"
-    }
-}
+      "lib": ["es5", "es6", "dom"],
+      "outDir": "./dist/",
+      "sourceMap": true,
+      "noImplicitAny": true,
+      "module": "commonjs",
+      "target": "es6",
+      "moduleResolution": "node",
+      "jsx": "react"
+    },
+    "include": ["./src/**/*"]
+  }

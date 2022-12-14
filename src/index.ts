@@ -3,8 +3,10 @@ import './css/style.css';
 
 const chooseLevelStage = document.querySelectorAll('.choose-level-number');
 const chooseLevelbutton = document.querySelector('.choose-level-button');
-const contentScreen1 = document.querySelector('.content-screen-1');
-const contentScreen2 = document.querySelector('.content-screen-2');
+const contentScreen1: HTMLImageElement =
+    document.querySelector('.content-screen-1');
+const contentScreen2: HTMLImageElement =
+    document.querySelector('.content-screen-2');
 const row1 = document.querySelector('.row-1');
 const row2 = document.querySelector('.row-2');
 const timer = document.querySelector('.info-time-tracker');
@@ -158,7 +160,7 @@ const CARDS = [
     },
 ];
 
-function shuffle(array) {
+function shuffle(array: any[]) {
     let currentIndex = array.length,
         temporaryValue,
         randomIndex;
@@ -172,32 +174,37 @@ function shuffle(array) {
     }
     return array;
 }
-let timerCount;
-let chosenLevelNumber;
+let timerCount: string | number | NodeJS.Timeout | undefined;
+let chosenLevelNumber: number;
 const shuffledDeck = shuffle(CARDS);
-let playCardsArr = [];
+let playCardsArr: any[] = [];
+let minutes: Number | string = 0;
+let seconds: Number | string = 0;
 
 // Экран выбора уровня
-chooseLevelStage.forEach((element) => {
-    element.addEventListener('click', function () {
-        document.querySelectorAll('.chosen-level').forEach((element) => {
-            element.classList.remove('chosen-level');
+function chooseLevelscreen() {
+    chooseLevelStage.forEach((element) => {
+        element.addEventListener('click', function () {
+            document.querySelectorAll('.chosen-level').forEach((element) => {
+                element.classList.remove('chosen-level');
+            });
+            chosenLevelNumber = Number(element.textContent);
+            element.classList.toggle('chosen-level');
         });
-        chosenLevelNumber = Number(element.textContent);
-        element.classList.toggle('chosen-level');
     });
-});
+}
+chooseLevelscreen();
 
 // Генерим карточки и выводим
-function cardsScreen(chosenLevelNumber) {
+function cardsScreen(chosenLevelNumber: number) {
     switch (chosenLevelNumber) {
         case 1:
-            for (let i = 0; i < 3; i++) {
+            for (let i: number = 0; i < 3; i++) {
                 let randomCards = Math.floor(
                     Math.random() * shuffledDeck.length
                 );
                 if (playCardsArr.includes(randomCards)) {
-                    let i = i - 1;
+                    i = i - 1;
                 } else {
                     playCardsArr.push(shuffledDeck[randomCards]);
                 }
@@ -205,12 +212,12 @@ function cardsScreen(chosenLevelNumber) {
             shuffle(playCardsArr);
             return playCardsArr;
         case 2:
-            for (let i = 0; i < 6; i++) {
+            for (let i: number = 0; i < 6; i++) {
                 let randomCards = Math.floor(
                     Math.random() * shuffledDeck.length
                 );
                 if (playCardsArr.includes(randomCards)) {
-                    let i = i - 1;
+                    i = i - 1;
                 } else {
                     playCardsArr.push(shuffledDeck[randomCards]);
                 }
@@ -218,12 +225,12 @@ function cardsScreen(chosenLevelNumber) {
             shuffle(playCardsArr);
             return playCardsArr;
         case 3:
-            for (let i = 0; i < 9; i++) {
+            for (let i: number = 0; i < 9; i++) {
                 let randomCards = Math.floor(
                     Math.random() * shuffledDeck.length
                 );
                 if (playCardsArr.includes(randomCards)) {
-                    let i = i - 1;
+                    i = i - 1;
                 } else {
                     playCardsArr.push(shuffledDeck[randomCards]);
                 }
@@ -236,6 +243,7 @@ function cardsScreen(chosenLevelNumber) {
 }
 
 chooseLevelbutton.addEventListener('click', function () {
+    playCardsArr = [];
     cardsScreen(chosenLevelNumber);
     contentScreen1.style.display = 'none';
     contentScreen2.style.display = 'flex';
@@ -252,14 +260,21 @@ chooseLevelbutton.addEventListener('click', function () {
             row2.appendChild(card);
         }
     }
-    const gameCardsFront = document.querySelectorAll('.card-image');
+    const gameCards = document.querySelectorAll('.card-image');
+    gameCards.forEach((element) => {
+        element.classList.add('closed');
+    });
+    let gameCardsClosed = document.querySelectorAll('.closed');
+    let gameCardsFront: NodeListOf<HTMLImageElement> =
+        document.querySelectorAll('.active');
 
     setTimeout(() => {
-        gameCardsFront.forEach((element) => {
+        gameCards.forEach((element: HTMLImageElement) => {
+            element.classList.add('closed');
             element.src = './static/img/cover.svg';
         });
-        let minutes = 0;
-        let seconds = 0;
+        minutes === 0;
+        seconds === 0;
         let min = 0;
         let sec = 0;
         timerCount = setInterval(function () {
@@ -284,40 +299,72 @@ chooseLevelbutton.addEventListener('click', function () {
         }, 1000);
     }, 5000);
 
-    gameCardsFront.forEach(function (gameCard, i) {
+    gameCardsClosed.forEach(function clicks(gameCard: HTMLImageElement, i) {
         gameCard.addEventListener('click', function () {
-            let activeCardsFront = document.querySelectorAll('.active');
-            if (activeCardsFront.length < 2) {
+            gameCardsFront = document.querySelectorAll('.active');
+            // Если выбрана одна карта
+            if (gameCardsFront.length < 2) {
                 gameCard.src = playCardsArr[i].image;
                 gameCard.classList.add('active');
-                activeCardsFront = document.querySelectorAll('.active');
-                if (
-                    activeCardsFront.length === 2 &&
-                    activeCardsFront[0].src === activeCardsFront[1].src
-                ) {
-                    setTimeout(() => {
-                        alert('Вы выиграли');
-                    }, 300);
-                    clearTimeout(timerCount);
-                } else if (
-                    activeCardsFront.length === 2 &&
-                    activeCardsFront[0].src !== activeCardsFront[1].src
-                ) {
-                    setTimeout(() => {
-                        alert('Вы проиграли');
-                    }, 300);
-                    clearTimeout(timerCount);
+                gameCard.classList.remove('closed');
+            }
+            // Если выбрано две карты
+            if (gameCardsFront.length === 2) {
+                gameCard.src = playCardsArr[i].image;
+                if (gameCardsFront[0].src === gameCardsFront[1].src) {
+                    gameCardsFront = document.querySelectorAll('.active');
+                    gameCardsFront.forEach((element) => {
+                        element.classList.remove('active');
+                        element.classList.remove('closed');
+                        gameCardsClosed = document.querySelectorAll('.closed');
+                    });
+                } else {
+                    gameCardsFront = document.querySelectorAll('.active');
+                    gameCardsClosed = document.querySelectorAll('.closed');
+                    gameCardsFront.forEach((element) => {
+                        gameCard.src = playCardsArr[i].image;
+                        element.classList.remove('active');
+                        element.classList.add('closed');
+                        gameCardsClosed = document.querySelectorAll('.closed');
+                        setTimeout(() => {
+                            element.src = './static/img/cover.svg';
+                        }, 600);
+                    });
                 }
-            } else {
-                activeCardsFront.forEach((element) => {
-                    element.classList.remove('active');
-                    element.src = './src/static/img/cover.svg';
-                });
             }
         });
     });
 
+    function finalScreen() {
+        gameCardsFront = document.querySelectorAll('.active');
+        gameCardsClosed = document.querySelectorAll('.closed');
+        gameCards.forEach((element) => {
+            if (
+                !element.classList.contains('active') &&
+                !element.classList.contains('closed')
+            ) {
+                clearTimeout(timerCount);
+                console.log(timer.innerHTML);
+            } else {
+                console.log('object');
+            }
+        });
+    }
+
     gameStartAgainButton.addEventListener('click', function () {
         clearTimeout(timerCount);
+        playCardsArr = [];
+        while (row1.firstChild) {
+            row1.removeChild(row1.firstChild);
+        }
+        while (row2.firstChild) {
+            row2.removeChild(row2.firstChild);
+        }
+        timer.innerHTML = '00.00';
+        contentScreen1.style.display = 'flex';
+        document.querySelectorAll('.chosen-level').forEach((element) => {
+            element.classList.remove('chosen-level');
+        });
+        contentScreen2.style.display = 'none';
     });
 });

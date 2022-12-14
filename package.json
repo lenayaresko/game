@@ -6,11 +6,10 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "webpack-dev-server --open",
         "format": "prettier --write ./src/",
-        "lint:js": "eslint ./src/*.js",
         "lint:css": "stylelint ./src/**/*.css",
         "lint:ts": "tsc --noEmit",
         "prepare": "husky install",
-        "lint": "npm run lint:js && npm run lint:css",
+        "lint": "npm run lint:ts && npm run lint:css",
         "build": "set NODE_ENV=production webpack"
     },
     "repository": {
